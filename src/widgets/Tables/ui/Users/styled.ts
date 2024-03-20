@@ -12,7 +12,11 @@ export const Th = styled.th`
   border-bottom: 1px solid #ddd;
 `;
 
-export const Tr = styled.tr``;
+export const TrHead = styled.tr``;
+
+export const Tr = styled.tr<{ checked: boolean }>`
+  background-color: ${(props) => (props.checked ? "#BF4F74" : "inherit")};
+`;
 
 export const Td = styled.td`
   padding: 8px;
@@ -34,3 +38,4 @@ export const BoxButton = styled.div`
   display: flex;
   gap: 5px;
 `;
+

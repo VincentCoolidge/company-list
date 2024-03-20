@@ -1,7 +1,10 @@
-import React, { useState } from "react";
+import { useState, useRef, ChangeEvent } from "react";
 import { Tr, Td, Checkbox, BoxButton } from "./styled";
 import { IEmployee } from "app/types/types";
 import { Button } from "shared/ui";
+
+import { useAppDispatch } from "app/store/hooks";
+import { CompanySlice } from "app/store/reducers/CompanySlice";
 
 import { ReactComponent as CancelIcon } from "shared/assets/cancel.svg";
 import { ReactComponent as EditIcon } from "shared/assets/edit.svg";
@@ -15,21 +18,94 @@ type Props = {
 const TableBody = ({ item }: Props) => {
   const { checked, firstName, lastName, position, id } = item;
   const [editMode, setEditMode] = useState(false);
+  const [editUser, setEditUser] = useState({
+    firstName,
+    lastName,
+    position,
+  });
+  const elementRef = useRef(null);
+  const dispatch = useAppDispatch();
 
-  const handleEditCompany = () => {};
+  const { deleteToUser, editToUser, checkToUser } = CompanySlice.actions;
 
-  const handleCancel = () => {};
+  const handleToggle = () => {
+    dispatch(checkToUser(id));
+  };
 
-  const handleDelete = () => {};
+  const handleInputChange = (event: ChangeEvent<HTMLInputElement>) => {
+    const { name, value } = event.target;
+    setEditUser((state) => ({ ...state, [name]: value }));
+  };
+
+  const handleCancel = () => {
+    setEditUser((state) => ({ ...state, firstName, lastName, position }));
+    setEditMode(false);
+  };
+
+  const handleDelete = () => {
+    dispatch(deleteToUser(id));
+  };
+
+  const handleEditCompany = () => {
+    if (
+      editUser.firstName.trim() !== "" &&
+      editUser.lastName.trim() !== "" &&
+      editUser.position.trim() !== ""
+    ) {
+      dispatch(
+        editToUser({
+          id: id,
+          firstName: editUser.firstName,
+          lastName: editUser.lastName,
+          position: editUser.position,
+        })
+      );
+      setEditUser((state) => ({ ...state, firstName, lastName, position }));
+      setEditMode(false);
+    }
+  };
 
   return (
-    <Tr>
+    <Tr checked={checked}>
       <Td>
-        <Checkbox checked={checked} />
+        <Checkbox checked={checked} onChange={handleToggle} />
       </Td>
-      <Td>{lastName}</Td>
-      <Td>{firstName}</Td>
-      <Td>{position}</Td>
+      <Td>
+        {editMode ? (
+          <input
+            type="text"
+            name="lastName"
+            value={editUser.lastName}
+            onChange={handleInputChange}
+          />
+        ) : (
+          lastName
+        )}
+      </Td>
+      <Td>
+        {editMode ? (
+          <input
+            type="text"
+            name="firstName"
+            value={editUser.firstName}
+            onChange={handleInputChange}
+          />
+        ) : (
+          firstName
+        )}
+      </Td>
+      <Td>
+        {editMode ? (
+          <input
+            type="text"
+            name="position"
+            value={editUser.position}
+            onChange={handleInputChange}
+          />
+        ) : (
+          position
+        )}
+      </Td>
       <Td>
         {editMode ? (
           <BoxButton>

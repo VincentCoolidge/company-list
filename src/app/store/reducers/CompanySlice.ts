@@ -2,6 +2,7 @@ import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { initialState } from "../initialState";
 import { ICompany, IEmployee } from "app/types/types";
 import { v4 as uuidv4 } from "uuid";
+import { stat } from "fs";
 
 export const CompanySlice = createSlice({
   name: "companies-list",
@@ -18,7 +19,12 @@ export const CompanySlice = createSlice({
 
       if (company) {
         company.checked = !company.checked;
-        state.selectedCompany = company;
+
+        if (state.selectedCompany === null) {
+          state.selectedCompany = company;
+        } else {
+          state.selectedCompany = null;
+        }
       }
     },
     addCompany: (
@@ -68,7 +74,152 @@ export const CompanySlice = createSlice({
         company.address = action.payload.address;
       }
     },
+    addtoUser: (
+      state,
+      action: PayloadAction<{
+        lastName: string;
+        firstName: string;
+        position: string;
+      }>
+    ) => {
+      const newUser: IEmployee = {
+        id: uuidv4() + "user",
+        checked: false,
+        lastName: action.payload.lastName,
+        firstName: action.payload.firstName,
+        position: action.payload.position,
+      };
+
+      if (state.selectedCompany === null) {
+        return;
+      }
+
+      const currentIDCompany = state.selectedCompany.id;
+
+      if (state.companies === null) {
+        return;
+      }
+
+      const company = state.companies.find(
+        (item) => item.id === currentIDCompany
+      );
+
+      if (company) {
+        company.employeesCount = company.employees.length + 1;
+        company.employees.push(newUser);
+        state.selectedCompany.employees.push(newUser);
+      }
+    },
+    deleteToUser: (state, action: PayloadAction<string>) => {
+      if (state.selectedCompany === null) {
+        return;
+      }
+
+      const currentIDCompany = state.selectedCompany.id;
+
+      if (state.companies === null) {
+        return;
+      }
+
+      const company = state.companies.find(
+        (item) => item.id === currentIDCompany
+      );
+
+      if (company) {
+        company.employeesCount = company.employees.length - 1;
+        const index = company.employees.findIndex(
+          (item) => item.id === action.payload
+        );
+
+        if (index === -1) {
+          return;
+        }
+
+        company.employees.splice(index, 1);
+        state.selectedCompany.employees.splice(index, 1);
+      }
+    },
+    editToUser: (
+      state,
+      action: PayloadAction<{
+        id: string;
+        firstName: string;
+        lastName: string;
+        position: string;
+      }>
+    ) => {
+      if (state.selectedCompany === null) {
+        return;
+      }
+
+      const currentIDCompany = state.selectedCompany.id;
+
+      if (state.companies === null) {
+        return;
+      }
+
+      const company = state.companies.find(
+        (item) => item.id === currentIDCompany
+      );
+
+      if (company) {
+        const user = company.employees.find(
+          (item) => item.id === action.payload.id
+        );
+
+        if (user) {
+          user.firstName = action.payload.firstName;
+          user.lastName = action.payload.firstName;
+          user.position = action.payload.firstName;
+
+          const currentUser = state.selectedCompany.employees.find(
+            (item) => item.id === action.payload.id
+          );
+
+          if (currentUser) {
+            currentUser.firstName = action.payload.firstName;
+            currentUser.lastName = action.payload.firstName;
+            currentUser.position = action.payload.firstName;
+          }
+        }
+      }
+    },
+    checkToUser: (state, action: PayloadAction<string>) => {
+      if (state.selectedCompany === null) {
+        return;
+      }
+
+      const currentIDCompany = state.selectedCompany.id;
+
+      if (state.companies === null) {
+        return;
+      }
+
+      const company = state.companies.find(
+        (item) => item.id === currentIDCompany
+      );
+
+      if (company) {
+        const user = company.employees.find(
+          (item) => item.id === action.payload
+        );
+
+        if (user) {
+          user.checked = !user.checked;
+
+          const currentUser = state.selectedCompany.employees.find(
+            (item) => item.id === action.payload
+          );
+
+          if (currentUser) {
+            currentUser.checked = !currentUser.checked;
+          }
+        }
+      }
+    },
   },
 });
+
+// checkToCompany, deleteToCompany, editToCompany
 
 export default CompanySlice.reducer;

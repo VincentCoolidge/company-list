@@ -3,12 +3,6 @@ import { EntityState } from "@reduxjs/toolkit";
 
 import { ICompany, IEmployee } from "app/types/types";
 
-// interface IinitialState {
-//   companies: ICompany[] | null;
-//   selectedCompanies: ICompany[] | null;
-//   listEmployees: IUser[] | null;
-// }
-
 interface State {
   companies: ICompany[] | null;
   selectedCompany: ICompany | null;
@@ -24,35 +18,35 @@ export const initialState: State = {
       address: "123 Main Street, City A",
       employees: [
         {
-          id: uuidv4() + "user",
+          id: "user" + uuidv4(),
           checked: false,
           lastName: "Doe",
           firstName: "John",
           position: "Developer",
         },
         {
-          id: uuidv4() + "user",
+          id: "user" + uuidv4(),
           checked: false,
           lastName: "Smith",
           firstName: "Jane",
           position: "Designer",
         },
         {
-          id: uuidv4() + "user",
+          id: "user" + uuidv4(),
           checked: false,
           lastName: "Johnson",
           firstName: "Alice",
           position: "Manager",
         },
         {
-          id: uuidv4() + "user",
+          id: "user" + uuidv4(),
           checked: false,
           lastName: "Brown",
           firstName: "Bob",
           position: "Engineer",
         },
         {
-          id: uuidv4() + "user",
+          id: "user" + uuidv4(),
           checked: false,
           lastName: "Lee",
           firstName: "Sarah",
@@ -68,35 +62,35 @@ export const initialState: State = {
       address: "456 Elm Street, City B",
       employees: [
         {
-          id: uuidv4() + "user",
+          id: "user" + uuidv4(),
           checked: false,
           lastName: "Davis",
           firstName: "Mike",
           position: "Marketing",
         },
         {
-          id: uuidv4() + "user",
+          id: "user" + uuidv4(),
           checked: false,
           lastName: "Wilson",
           firstName: "Emily",
           position: "Sales",
         },
         {
-          id: uuidv4() + "user",
+          id: "user" + uuidv4(),
           checked: false,
           lastName: "White",
           firstName: "David",
           position: "HR",
         },
         {
-          id: uuidv4() + "user",
+          id: "user" + uuidv4(),
           checked: false,
           lastName: "Miller",
           firstName: "Olivia",
           position: "Finance",
         },
         {
-          id: uuidv4() + "user",
+          id: "user" + uuidv4(),
           checked: false,
           lastName: "Anderson",
           firstName: "Michael",
