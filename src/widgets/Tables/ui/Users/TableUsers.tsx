@@ -1,45 +1,42 @@
-import React from "react";
-import { Table, Tr, Th, Checkbox, Td } from "./styled";
+import React, { useState } from "react";
+import { Table, Tr, Th, Checkbox, Td, HeaderBoxButton } from "./styled";
 import { useAppSelector } from "app/store/hooks";
+import TableBody from "./TableBody";
+import { Button } from "shared/ui";
 
 export const TableUsers = () => {
-  const { selectedCompanies } = useAppSelector((state) => state.companyReducer);
+  const { selectedCompany } = useAppSelector((state) => state.companyReducer);
+  const [addMode, setAddMode] = useState(false);
 
-  if (!selectedCompanies) {
+  if (!selectedCompany) {
     return null;
   }
 
   return (
-    <Table>
-      <thead>
-        <Tr>
-          <Th>
-            <Checkbox />
-            Выделить всё
-          </Th>
-          <Th>Фамилия</Th>
-          <Th>Имя</Th>
-          <Th>Должность</Th>
-        </Tr>
-      </thead>
-      <tbody>
-        {/* <Tr>
-          <Td>
-            <Checkbox />
-          </Td>
-          <Td>Doe</Td>
-          <Td>John</Td>
-          <Td>Developer</Td>
-        </Tr>
-        <Tr>
-          <Td>
-            <Checkbox />
-          </Td>
-          <Td>Smith</Td>
-          <Td>Jane</Td>
-          <Td>Designer</Td>
-        </Tr> */}
-      </tbody>
-    </Table>
+    <>
+      <HeaderBoxButton>
+        {!addMode && (
+          <Button onClick={() => setAddMode(true)}>Добавить работника</Button>
+        )}
+      </HeaderBoxButton>
+      <Table>
+        <thead>
+          <Tr>
+            <Th>
+              <Checkbox />
+            </Th>
+            <Th>Фамилия</Th>
+            <Th>Имя</Th>
+            <Th>Должность</Th>
+            <Th />
+          </Tr>
+        </thead>
+        <tbody>
+          {selectedCompany.employees.map((item, i) => {
+            return <TableBody item={item} key={item.id} />;
+          })}
+        </tbody>
+      </Table>
+    </>
   );
 };

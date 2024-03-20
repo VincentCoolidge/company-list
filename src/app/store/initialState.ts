@@ -11,8 +11,7 @@ import { ICompany, IEmployee } from "app/types/types";
 
 interface State {
   companies: ICompany[] | null;
-  selectedCompanies: ICompany[] | null;
-  listEmployees: IEmployee[] | null;
+  selectedCompany: ICompany | null;
 }
 
 export const initialState: State = {
@@ -24,41 +23,41 @@ export const initialState: State = {
       employeesCount: 5,
       address: "123 Main Street, City A",
       employees: [
-        // {
-        //   id: uuidv4() + "user",
-        //   checked: false,
-        //   lastName: "Doe",
-        //   firstName: "John",
-        //   position: "Developer",
-        // },
-        // {
-        //   id: uuidv4() + "user",
-        //   checked: false,
-        //   lastName: "Smith",
-        //   firstName: "Jane",
-        //   position: "Designer",
-        // },
-        // {
-        //   id: uuidv4() + "user",
-        //   checked: false,
-        //   lastName: "Johnson",
-        //   firstName: "Alice",
-        //   position: "Manager",
-        // },
-        // {
-        //   id: uuidv4() + "user",
-        //   checked: false,
-        //   lastName: "Brown",
-        //   firstName: "Bob",
-        //   position: "Engineer",
-        // },
-        // {
-        //   id: uuidv4() + "user",
-        //   checked: false,
-        //   lastName: "Lee",
-        //   firstName: "Sarah",
-        //   position: "Analyst",
-        // },
+        {
+          id: uuidv4() + "user",
+          checked: false,
+          lastName: "Doe",
+          firstName: "John",
+          position: "Developer",
+        },
+        {
+          id: uuidv4() + "user",
+          checked: false,
+          lastName: "Smith",
+          firstName: "Jane",
+          position: "Designer",
+        },
+        {
+          id: uuidv4() + "user",
+          checked: false,
+          lastName: "Johnson",
+          firstName: "Alice",
+          position: "Manager",
+        },
+        {
+          id: uuidv4() + "user",
+          checked: false,
+          lastName: "Brown",
+          firstName: "Bob",
+          position: "Engineer",
+        },
+        {
+          id: uuidv4() + "user",
+          checked: false,
+          lastName: "Lee",
+          firstName: "Sarah",
+          position: "Analyst",
+        },
       ],
     },
     {
@@ -68,44 +67,43 @@ export const initialState: State = {
       employeesCount: 5,
       address: "456 Elm Street, City B",
       employees: [
-        // {
-        //   id: uuidv4() + "user",
-        //   checked: false,
-        //   lastName: "Davis",
-        //   firstName: "Mike",
-        //   position: "Marketing",
-        // },
-        // {
-        //   id: uuidv4() + "user",
-        //   checked: false,
-        //   lastName: "Wilson",
-        //   firstName: "Emily",
-        //   position: "Sales",
-        // },
-        // {
-        //   id: uuidv4() + "user",
-        //   checked: false,
-        //   lastName: "White",
-        //   firstName: "David",
-        //   position: "HR",
-        // },
-        // {
-        //   id: uuidv4() + "user",
-        //   checked: false,
-        //   lastName: "Miller",
-        //   firstName: "Olivia",
-        //   position: "Finance",
-        // },
-        // {
-        //   id: uuidv4() + "user",
-        //   checked: false,
-        //   lastName: "Anderson",
-        //   firstName: "Michael",
-        //   position: "IT",
-        // },
+        {
+          id: uuidv4() + "user",
+          checked: false,
+          lastName: "Davis",
+          firstName: "Mike",
+          position: "Marketing",
+        },
+        {
+          id: uuidv4() + "user",
+          checked: false,
+          lastName: "Wilson",
+          firstName: "Emily",
+          position: "Sales",
+        },
+        {
+          id: uuidv4() + "user",
+          checked: false,
+          lastName: "White",
+          firstName: "David",
+          position: "HR",
+        },
+        {
+          id: uuidv4() + "user",
+          checked: false,
+          lastName: "Miller",
+          firstName: "Olivia",
+          position: "Finance",
+        },
+        {
+          id: uuidv4() + "user",
+          checked: false,
+          lastName: "Anderson",
+          firstName: "Michael",
+          position: "IT",
+        },
       ],
     },
   ],
-  selectedCompanies: null,
-  listEmployees: null,
+  selectedCompany: null,
 };

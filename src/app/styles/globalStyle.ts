@@ -8,8 +8,8 @@ body {
     margin: 0;
     padding: 0;
     height: 100vh;
-    font-size: 24px;
-    font-line: 32px;
+    font-size: 14px;
+    line-height: 16px;
   }
 
   #root {

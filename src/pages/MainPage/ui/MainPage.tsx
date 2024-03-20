@@ -1,11 +1,15 @@
 import { TableCompany, TableUsers } from "widgets/Tables";
-import { Container } from "./styled";
+import { Root, Container } from "./styled";
 
 export const MainPage = () => {
   return (
-    <Container>
-      <TableCompany />
-      <TableUsers />
-    </Container>
+    <Root>
+      <Container>
+        <TableCompany />
+      </Container>
+      <Container>
+        <TableUsers />
+      </Container>
+    </Root>
   );
 };
